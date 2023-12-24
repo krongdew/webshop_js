@@ -24,6 +24,7 @@
             <span id="cart-count">0</span>
         </a>
         </div>
+
         <a href="javascript:void(0);" class="icon" onclick="myFunction()">
         <i class="fa-solid fa-bars"></i>
         </a> 
@@ -37,12 +38,9 @@
         <!-- รายการสินค้าจะปรากฏ -->
         <div id="cart-items"></div>
         <button class="p-button" onclick="placeOrder()">Checkout</button>
-       
         </div>
 
-
-
-    
+        <!-- notebook animation  -->
       <div class="head-content">
         <div class="headtext">
             <div class="text">
@@ -54,12 +52,12 @@
             <img class="head-img" src="./img/notebook.png">
         </div>
       </div>
-
     </div>
     
     
     <div class="flex-container">
         <div class="content">
+
             <div class="product">
                 <img src="./img/notebook.png" width="150px">
                 <p><h5>Product 1</h5></p>
@@ -67,8 +65,8 @@
                 <a href="javascript:void(0);" onclick="addToCart('Product 1')">
                     <button class="p-button">Add to Cart</button>
                 </a> 
-            </div>   
-    
+            </div>  
+            
             <div class="product">
                 <img src="./img/notebook.png" width="150px">
                 <p><h5>Product 2</h5></p>
@@ -77,6 +75,7 @@
                     <button class="p-button">Add to Cart</button>
                 </a>  
             </div>
+
         </div>
     </div>
     
@@ -102,7 +101,7 @@
 
 <script>
    var topnav = document.getElementById("myTopnav");
-  var topnavOffset = topnav.offsetTop;
+    var topnavOffset = topnav.offsetTop;
 
 window.onscroll = function() {
     if (window.pageYOffset > topnavOffset) {
@@ -113,9 +112,67 @@ window.onscroll = function() {
 };
 </script>
 
+<script>
+        var cartItems = [];
+    
+    function addToCart(item) {
+        cartItems.push(item);
+        updateCartCount();
+        updateCartContent();
+    }
 
-      
-  
-  
+    function updateCartContent() {
+    var cartItemsContainer = document.getElementById("cart-items");
+    cartItemsContainer.innerHTML = ""; // เคลียร์เนื้อหาตระกร้า
+
+    cartItems.forEach(function (item) {
+        var cartItem = document.createElement("div");
+        cartItem.innerHTML = item;
+        cartItemsContainer.appendChild(cartItem);
+    });
+
+    // แสดงหรือซ่อนเนื้อหาตระกร้า
+    var cartContent = document.getElementById("cart-content");
+    cartContent.classList.add("show-cart");
+    }
+
+
+
+
+
+    function updateCartCount(){
+        var cartCount = document.getElementById("cart-count");
+        cartCount.innerHTML = cartItems.length;
+    }
+
+    function toggleCart() {
+        var cartContent = document.getElementById("cart-content");
+        //แสดงหรือซ่อนเนื้อหาตระกร้า
+        cartContent.classList.toggle("show-cart");
+    }
+
+    function closeCart() {
+        var cartContent = document.getElementById("cart-content");
+        cartContent.classList.remove("show-cart");
+    }
+
+    function placeOrder() {
+    // ตรวจสอบว่ามีสินค้าในตระกร้าหรือไม่
+    if (cartItems.length > 0) {
+        // ทำการสั่งซื้อ (เพิ่มโค้ดต่อไปนี้ตามต้องการ)
+        alert("สั่งซื้อสำเร็จ!");
+        // ล้างตะกร้าหลังจากการสั่งซื้อ
+        cartItems = [];
+        updateCartCount();
+        updateCartContent();
+    } else {
+        alert("ตระกร้าสินค้าว่างเปล่า");
+    }
+}
+
+
+
+
+</script>
 </body>
 </html>
